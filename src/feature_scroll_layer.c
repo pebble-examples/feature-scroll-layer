@@ -8,9 +8,6 @@ static ScrollLayer *s_scroll_layer;
 // We also use a text layer to scroll in the scroll layer
 static TextLayer *s_text_layer;
 
-// The scroll layer can other things in it such as an invert layer
-static InverterLayer *s_inverter_layer;
-
 // Lorum ipsum to have something to scroll
 static char s_scroll_text[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quam tellus, fermentu  m quis vulputate quis, vestibulum interdum sapien. Vestibulum lobortis pellentesque pretium. Quisque ultricies purus e  u orci convallis lacinia. Cras a urna mi. Donec convallis ante id dui dapibus nec ullamcorper erat egestas. Aenean a m  auris a sapien commodo lacinia. Sed posuere mi vel risus congue ornare. Curabitur leo nisi, euismod ut pellentesque se  d, suscipit sit amet lorem. Aliquam eget sem vitae sem aliquam ornare. In sem sapien, imperdiet eget pharetra a, lacin  ia ac justo. Suspendisse at ante nec felis facilisis eleifend.";
 
@@ -45,15 +42,10 @@ static void main_window_load(Window *window) {
   // Add the layers for display
   scroll_layer_add_child(s_scroll_layer, text_layer_get_layer(s_text_layer));
 
-  // The inverter layer will highlight some text
-  s_inverter_layer = inverter_layer_create(GRect(0, 28, bounds.size.w, 28));
-  scroll_layer_add_child(s_scroll_layer, inverter_layer_get_layer(s_inverter_layer));
-
   layer_add_child(window_layer, scroll_layer_get_layer(s_scroll_layer));
 }
 
 static void main_window_unload(Window *window) {
-  inverter_layer_destroy(s_inverter_layer);
   text_layer_destroy(s_text_layer);
   scroll_layer_destroy(s_scroll_layer);
 }
